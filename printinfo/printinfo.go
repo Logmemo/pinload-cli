@@ -1,30 +1,46 @@
+package printinfo
 
+import (
+	"fmt"
+)
+
+func HelloMessage(version string) {
+	var authorInfo = map[string]string{
+		"author": "Logmemo",
+		"github": "https://github.com/pinterest-download",
+		"email":  "logmemogithub@gmail.com",
+	}
+
+	fmt.Printf(`
 	██╗      ██████╗ ██╗███╗   ██╗██╗      ██████╗  █████╗ ██████╗ 
 	╚██╗     ██╔══██╗██║████╗  ██║██║     ██╔═══██╗██╔══██╗██╔══██╗
 	 ╚██╗    ██████╔╝██║██╔██╗ ██║██║     ██║   ██║███████║██║  ██║
 	 ██╔╝    ██╔═══╝ ██║██║╚██╗██║██║     ██║   ██║██╔══██║██║  ██║
 	██╔╝     ██║     ██║██║ ╚████║███████╗╚██████╔╝██║  ██║██████╔╝
 	╚═╝      ╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ 
+                                                      
+	Version: %s
+	Author:  %s
+	Github:  %s
+	Email:   %s
+	`,
+		version,
+		authorInfo["author"],
+		authorInfo["github"],
+		authorInfo["email"],
+	)
+}
 
-Simple CLI app for download pins, boards and user profiles from pinterest.
+func PinsOnBoard(pins []string) {
+	fmt.Printf("\nFound %d pins from board:", len(pins))
+	for i, v := range pins {
+		fmt.Printf("\n%d. %s", i, v)
+	}
+}
 
-> [!WARNING]
-> After first executing the app, it creates a config file in the .exe folder. If you move .exe file, the config file will create again with default values
-
-> [!CAUTION]
-> Today, only images can be downloaded.
-
-
-## Options
-```
-[1] Download pin
-[2] Download board
-[3] Download profile
-[4] Change download folder
-[5] Check logout
-```
-- **Download pin** - download pin from URL
-- **Download board** - download board from URL
-- **Download profile** - download pin from user nickname
-- **Change download folder** - option to change download folder. By default, it is your download folder
-- **Check logout** - if you interrupt the parsing process, check (and log out) if the user is logged in.
+func PrintBoards(boardNames []string, boardLinks []string) {
+	fmt.Printf("Found %d board(s):", len(boardNames))
+	for i, v := range boardNames {
+		fmt.Printf("\n%d. %s (Board URL: %s )", i, v, boardLinks[i])
+	}
+}
