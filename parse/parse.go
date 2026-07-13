@@ -134,7 +134,7 @@ func GetBoard(url string, browser *rod.Browser) (images []string, boardName stri
 	boardName = page.MustElement("h1").MustText()
 	fmt.Println("\n\nBoard name: ", boardName)
 
-	pinCount := page.MustElement("div[data-test-id='pin-count']").MustText()
+	pinCount := page.MustElement("span[data-test-id='pin-count']").MustText()
 	fmt.Println("Board pin amount: ", pinCount)
 
 	unlockScroll(page)
